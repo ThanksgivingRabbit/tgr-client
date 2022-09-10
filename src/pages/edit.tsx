@@ -1,10 +1,9 @@
-import { Center, Heading, Stack, Box, Flex } from '@chakra-ui/react';
+import { Center, Heading, Box, Flex } from '@chakra-ui/react';
 import { useState } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 
-import ContentModal from '../components/edit/contentModal';
-import PasswordModal from '../components/edit/passwordModal';
-import ReceiverSenderModal from '../components/edit/receiverSenderModal';
+import { ContentModal, ReceiverSenderModal, PasswordModal } from '../components/edit/index';
 import { useSongpyeon } from '../hook/useSongPyeon';
 
 const Container = styled(Center)`
@@ -13,12 +12,9 @@ const Container = styled(Center)`
   background: url(' ./src/assets/background.jpeg ');
 `;
 
-const ContentContainer = styled(Stack)`
-  flex-direction: column;
-`;
-
 const StepCounterCountainer = styled(Flex)`
   padding: 1rem 0px;
+  margin-bottom: 1rem;
   align-items: center;
   width: 100%;
   justify-content: space-around;
@@ -30,7 +26,7 @@ const CircleIcon = styled(Flex)<{ selected: boolean }>`
   justify-content: center;
   align-items: center;
   height: 2rem;
-  border: 1px solid ${({ selected }) => (selected ? 'green' : 'grey')};
+  border: 2px solid ${({ selected }) => (selected ? 'green' : 'grey')};
 `;
 
 const MAX_PAGE = 3;
@@ -62,9 +58,10 @@ const EditPage = () => {
     <Container h='100vh'>
       <Box
         padding='8'
-        maxW='md'
-        minWidth='4rem'
-        maxH='md'
+        width='90%'
+        maxWidth='400px'
+        height='90%'
+        maxHeight='500px'
         display='flex'
         flexDirection='column'
         background='white'
@@ -77,30 +74,38 @@ const EditPage = () => {
           currentCount={counter}
           maxCount={MAX_PAGE}
         />
-        <ContentContainer spacing={12}>
-          {counter === 1 && (
-            <ReceiverSenderModal
-              songpyeon={songpyeon}
-              handleClickNextPage={handleClickNextPage}
-              handleSetSongpyeon={handleSetSongpyeon}
-            />
-          )}
-          {counter === 2 && (
-            <ContentModal
-              songpyeon={songpyeon}
-              handleClickNextPage={handleClickNextPage}
-              handleClickPrevPage={handleClickPrevPage}
-              handleSetSongpyeon={handleSetSongpyeon}
-            />
-          )}
-          {counter === 3 && (
-            <PasswordModal
-              songpyeon={songpyeon}
-              handleClickPrevPage={handleClickPrevPage}
-              handleSetSongpyeon={handleSetSongpyeon}
-            />
-          )}
-        </ContentContainer>
+        <TransitionGroup className='transitions-wrapper'>
+          <CSSTransition
+            key={counter}
+            classNames='right'
+            timeout={500}
+          >
+            <div style={{ height: '100%' }}>
+              {counter === 1 && (
+                <ReceiverSenderModal
+                  songpyeon={songpyeon}
+                  handleClickNextPage={handleClickNextPage}
+                  handleSetSongpyeon={handleSetSongpyeon}
+                />
+              )}
+              {counter === 2 && (
+                <ContentModal
+                  songpyeon={songpyeon}
+                  handleClickNextPage={handleClickNextPage}
+                  handleClickPrevPage={handleClickPrevPage}
+                  handleSetSongpyeon={handleSetSongpyeon}
+                />
+              )}
+              {counter === 3 && (
+                <PasswordModal
+                  songpyeon={songpyeon}
+                  handleClickPrevPage={handleClickPrevPage}
+                  handleSetSongpyeon={handleSetSongpyeon}
+                />
+              )}
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
       </Box>
     </Container>
   );

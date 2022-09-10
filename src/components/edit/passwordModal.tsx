@@ -1,5 +1,5 @@
 /* eslint no-return-assign: "error" */
-import { Button, Flex, Checkbox, Text, Input, Spacer } from '@chakra-ui/react';
+import { Button, Flex, Checkbox, Text, Input } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -10,6 +10,13 @@ interface PasswordModalType {
   handleClickPrevPage: () => void;
   songpyeon: SongpyeonType;
 }
+
+const Container = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+`;
 
 const Wrapper = styled(Flex)`
   align-items: center;
@@ -38,7 +45,7 @@ export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalT
   };
 
   return (
-    <>
+    <Container>
       <Wrapper minWidth='200px'>
         <Title>비밀번호 여부</Title>
         <Checkbox
@@ -47,7 +54,7 @@ export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalT
           onChange={handleCheckPassword}
         />
       </Wrapper>
-      {isPassword ? (
+      {isPassword && (
         <Wrapper
           direction='column'
           gap='1rem'
@@ -61,17 +68,11 @@ export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalT
             <Input ref={(el) => (hint.current = el)} />
           </Wrapper>
         </Wrapper>
-      ) : (
-        <>
-          <Spacer />
-          <Spacer />
-          <Spacer />
-        </>
       )}
       <Wrapper>
         <Button onClick={handleClickPrevPage}>이전</Button>
         <Button onClick={handleSubmit}>만들기</Button>
       </Wrapper>
-    </>
+    </Container>
   );
 };

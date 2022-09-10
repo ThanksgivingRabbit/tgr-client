@@ -12,6 +12,13 @@ interface ReceiverSenderModalType {
   songpyeon: SongpyeonType;
 }
 
+const Container = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+`;
+
 const Wrapper = styled(Flex)`
   align-items: center;
   gap: 2rem;
@@ -28,8 +35,9 @@ export const ReceiverSenderModal = ({
   const receiver = useRef(null);
   const sender = useRef(null);
 
-  const handleClick = () => {
+  const handleClick = (event) => {
     if (sender.current.value === '') return;
+    event.preventDefault();
     handleSetSongpyeon({
       receiver: receiver.current.value,
       sender: sender.current.value,
@@ -44,16 +52,24 @@ export const ReceiverSenderModal = ({
   }, [receiver, sender]);
 
   return (
-    <>
+    <Container>
       <Wrapper>
         <Title>보내는 사람</Title>
         <Input ref={(el) => (receiver.current = el)} />
       </Wrapper>
       <Wrapper>
         <Title>받는 사람</Title>
-        <Input ref={(el) => (sender.current = el)} />
+        <Input
+          ref={(el) => (sender.current = el)}
+          required
+        />
       </Wrapper>
-      <Button onClick={handleClick}>다음</Button>
-    </>
+      <Button
+        type='submit'
+        onClick={handleClick}
+      >
+        다음
+      </Button>
+    </Container>
   );
 };

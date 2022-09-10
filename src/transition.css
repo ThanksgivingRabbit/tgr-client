@@ -1,8 +1,12 @@
 .transitions-wrapper {
   position: relative;
   overflow: hidden;
+  height: 100%;
   /* height: calc(var(--vh, 1vh) * 100); */
   /* width: 100vw; */
+}
+.right {
+  height: 100%;
 }
 .right-enter {
   transform: translateX(100%);

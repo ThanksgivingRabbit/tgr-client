@@ -14,6 +14,13 @@ interface ContentModalType {
   songpyeon: SongpyeonType;
 }
 
+const Container = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+`;
+
 const Wrapper = styled(Flex)`
   align-items: center;
   justify-content: space-between;
@@ -36,8 +43,9 @@ export const ContentModal = ({
     content.current.value = getRandomComment();
   };
 
-  const handleClick = () => {
+  const handleClick = (event) => {
     if (content.current.value === '') return;
+    event.preventDefault();
     handleSetSongpyeon({
       content: content.current.value,
     });
@@ -48,16 +56,24 @@ export const ContentModal = ({
     content.current.value = songpyeon.content;
   }, [content]);
   return (
-    <>
+    <Container>
       <Wrapper>
         <Title>덕담 내용을 적어주세요</Title>
         <Button onClick={handleGetRandomComment}>랜덤 돌리기</Button>
       </Wrapper>
-      <Textarea ref={(el) => (content.current = el)} />
+      <Textarea
+        ref={(el) => (content.current = el)}
+        required
+      />
       <Wrapper>
         <Button onClick={handleClickPrevPage}>이전</Button>
-        <Button onClick={handleClick}>다음</Button>
+        <Button
+          type='submit'
+          onClick={handleClick}
+        >
+          다음
+        </Button>
       </Wrapper>
-    </>
+    </Container>
   );
 };
