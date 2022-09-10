@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { SongpyeonType } from '../../hook/useSongPyeon';
 import { getRandomComment } from '../../utils/index';
 
-interface ReceiverSenderModalType {
+interface ContentModalType {
   handleClickNextPage: () => void;
   handleClickPrevPage: () => void;
   // eslint-disable-next-line no-unused-vars
@@ -22,13 +22,14 @@ const Wrapper = styled(Flex)`
 const Title = styled(Text)`
   white-space: nowrap;
   min-width: 6rem;
+  font-size: 0.8rem;
 `;
-const ContentModal = ({
+export const ContentModal = ({
   handleClickNextPage,
   handleClickPrevPage,
   handleSetSongpyeon,
   songpyeon,
-}: ReceiverSenderModalType) => {
+}: ContentModalType) => {
   const content = useRef(null);
 
   const handleGetRandomComment = () => {
@@ -60,5 +61,3 @@ const ContentModal = ({
     </>
   );
 };
-
-export default ContentModal;

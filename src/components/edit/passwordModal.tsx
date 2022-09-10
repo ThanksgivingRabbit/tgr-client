@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { makeSongpyeon } from '../../api';
 import { SongpyeonType } from '../../hook/useSongPyeon';
 
-interface ReceiverSenderModalType {
+interface PasswordModalType {
   handleClickPrevPage: () => void;
   songpyeon: SongpyeonType;
 }
@@ -20,7 +20,7 @@ const Title = styled(Text)`
   white-space: nowrap;
   min-width: 6rem;
 `;
-const PasswordModal = ({ songpyeon, handleClickPrevPage }: ReceiverSenderModalType) => {
+export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalType) => {
   const [isPassword, setIsPassword] = useState<boolean>(false);
   const password = useRef(null);
   const hint = useRef(null);
@@ -39,7 +39,7 @@ const PasswordModal = ({ songpyeon, handleClickPrevPage }: ReceiverSenderModalTy
 
   return (
     <>
-      <Wrapper minWidth='16rem'>
+      <Wrapper minWidth='200px'>
         <Title>비밀번호 여부</Title>
         <Checkbox
           size='lg'
@@ -75,5 +75,3 @@ const PasswordModal = ({ songpyeon, handleClickPrevPage }: ReceiverSenderModalTy
     </>
   );
 };
-
-export default PasswordModal;

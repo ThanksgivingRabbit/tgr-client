@@ -20,7 +20,7 @@ const Title = styled(Text)`
   white-space: nowrap;
   min-width: 6rem;
 `;
-const ReceiverSenderModal = ({
+export const ReceiverSenderModal = ({
   handleClickNextPage,
   handleSetSongpyeon,
   songpyeon,
@@ -57,5 +57,3 @@ const ReceiverSenderModal = ({
     </>
   );
 };
-
-export default ReceiverSenderModal;
