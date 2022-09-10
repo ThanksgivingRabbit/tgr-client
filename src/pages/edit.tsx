@@ -62,8 +62,9 @@ const EditPage = () => {
     <Container h='100vh'>
       <Box
         padding='8'
-        minW='md'
-        minH='md'
+        maxW='md'
+        minWidth='4rem'
+        maxH='md'
         display='flex'
         flexDirection='column'
         background='white'

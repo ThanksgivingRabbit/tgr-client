@@ -39,7 +39,7 @@ const PasswordModal = ({ songpyeon, handleClickPrevPage }: ReceiverSenderModalTy
 
   return (
     <>
-      <Wrapper>
+      <Wrapper minWidth='16rem'>
         <Title>비밀번호 여부</Title>
         <Checkbox
           size='lg'
