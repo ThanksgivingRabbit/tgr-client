@@ -4,6 +4,7 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { SongpyeonType } from '../../hook/useSongPyeon';
+import { getRandomComment } from '../../utils/index';
 
 interface ReceiverSenderModalType {
   handleClickNextPage: () => void;
@@ -30,6 +31,10 @@ const ContentModal = ({
 }: ReceiverSenderModalType) => {
   const content = useRef(null);
 
+  const handleGetRandomComment = () => {
+    content.current.value = getRandomComment();
+  };
+
   const handleClick = () => {
     if (content.current.value === '') return;
     handleSetSongpyeon({
@@ -45,7 +50,7 @@ const ContentModal = ({
     <>
       <Wrapper>
         <Title>덕담 내용을 적어주세요</Title>
-        <Button>랜덤 돌리기</Button>
+        <Button onClick={handleGetRandomComment}>랜덤 돌리기</Button>
       </Wrapper>
       <Textarea ref={(el) => (content.current = el)} />
       <Wrapper>
