@@ -3,29 +3,50 @@
 import { Center, VStack, Input, Text, Box, Button, Spacer } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { authenticate, getSongpyeon } from '../api';
 import useConfetti from '../hook/useConfetti';
 import { useSongpyeon } from '../hook/useSongPyeon';
 
-const SongpyeonImg = styled.div<{ size: number }>`
-  width: ${({ size }) => `${size}rem`};
-  height: ${({ size }) => `${size}rem`};
-  background-size: cover !important;
-  background-position: center !important;
-  background: url('/songpyeon.png');
-`;
-
 const SongpyeonPage = () => {
   const { id } = useParams();
-  const [size, setSize] = useState(10);
+  const [height, setHeight] = useState(0);
+  const [size, setSize] = useState(0);
   const [isAuth, setIsAuth] = useState(false);
+  const [image] = useState(new Image());
+
   const inputRef = useRef<HTMLInputElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hint, setHint] = useState('');
   const { songpyeon, handleSetSongpyeon } = useSongpyeon();
 
-  useConfetti(size === 14);
+  useConfetti(size === 1);
+
+  const UpAndDown = () => {
+    const time = Date.now() / 200;
+    const t = Math.abs(Math.cos(time)) * 10;
+
+    setHeight(t);
+  };
+  useEffect(() => {
+    setInterval(UpAndDown, 0);
+  });
+
+  useEffect(() => {
+    if (canvasRef.current === null) return;
+    const ctx = canvasRef.current?.getContext('2d');
+    image.src = '/songpyeon.png';
+    image.onload = function () {
+      ctx.drawImage(image, 0, height, image.width, image.height);
+    };
+  }, [isAuth, canvasRef]);
+
+  useEffect(() => {
+    if (canvasRef.current === null) return;
+    const ctx = canvasRef.current?.getContext('2d');
+    ctx.clearRect(0, 0, window.screen.width, window.screen.height);
+    ctx.drawImage(image, 0, height, image.width, image.height);
+  }, [isAuth, canvasRef, height]);
 
   useEffect(() => {
     async function getFecth() {
@@ -52,8 +73,9 @@ const SongpyeonPage = () => {
   };
 
   const handleClick = () => {
-    setSize((prev) => Math.min(prev + 1, 14));
+    setSize((prev) => Math.min(prev + 1, 1));
   };
+
   return (
     <Center h='100vh'>
       {isAuth && (
@@ -68,13 +90,17 @@ const SongpyeonPage = () => {
       )}
       {!isAuth && (
         <div>
-          {size < 14 ? (
+          {size < 1 ? (
             // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
             <VStack
               align='center'
               onClick={handleClick}
             >
-              <SongpyeonImg size={size} />
+              <canvas
+                ref={canvasRef}
+                width={400}
+                height={300}
+              />
               <Text>눌러주세요</Text>
             </VStack>
           ) : (
