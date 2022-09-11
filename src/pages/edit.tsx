@@ -9,7 +9,7 @@ import { useSongpyeon } from '../hook/useSongPyeon';
 const Container = styled(Center)`
   height: 100%;
   width: 100%;
-  background: url(' ./src/assets/background.jpeg ');
+  background: url(' ./background.jpeg ');
 `;
 
 const StepCounterCountainer = styled(Flex)`

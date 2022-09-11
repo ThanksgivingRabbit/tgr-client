@@ -16,8 +16,8 @@ export const shareMessage = (from: string, code: string) => {
     objectType: 'text',
     text: `${from} 으로부터 편지가 도착했어요!`,
     link: {
-      mobileWebUrl: `http://localhost:3000/songpyeon/${code}`,
-      webUrl: `http://localhost:3000/songpyeon/${code}`,
+      mobileWebUrl: `https://thanksgivingrabbit.vercel.app/${code}`,
+      webUrl: `https://thanksgivingrabbit.vercel.app/${code}`,
     },
   });
 };

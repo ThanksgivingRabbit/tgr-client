@@ -26,7 +26,7 @@ const MainBox = styled(Box)`
 const MainPage = () => (
   <Box
     position='relative'
-    backgroundImage='./src/assets/test_image.png'
+    backgroundImage='./test_image.png'
     backgroundSize='100% 100%'
     minWidth='900px'
     minHeight='600px'
@@ -56,7 +56,7 @@ const MainPage = () => (
     </MainBox>
     <LogoImage
       width='300px'
-      src='./src/assets/thanksgivingrabbit.png'
+      src='./thanksgivingrabbit.png'
     />
   </Box>
 );
