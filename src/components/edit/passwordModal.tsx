@@ -37,7 +37,7 @@ export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalT
   const handleCheckPassword = () => setIsPassword((checked) => !checked);
 
   const handleSubmit = async () => {
-    if (password.current === null || hint.current === null) return;
+    if (isPassword && (password.current === null || hint.current === null)) return;
     if (isPassword && password.current?.value === '') return;
     if (isPassword && password.current.value !== '' && hint.current.value === '')
       alert('힌트를 넣어주세요');
