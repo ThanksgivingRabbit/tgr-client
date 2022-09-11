@@ -4,6 +4,7 @@ import EditPage from './pages/edit';
 import MainPage from './pages/main';
 import ResultPage from './pages/result';
 import SongpyeonPage from './pages/songpyeon';
+import './transition.css';
 
 function App() {
   return (
