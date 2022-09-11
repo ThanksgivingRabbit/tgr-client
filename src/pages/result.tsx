@@ -17,7 +17,7 @@ const ResultPage = () => {
   const { id, sender } = useParams();
 
   const handleShareToKakao = () => {
-    shareMessage(sender ?? '익명', id);
+    shareMessage(sender!, id!);
   };
 
   return (

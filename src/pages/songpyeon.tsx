@@ -20,7 +20,7 @@ const SongpyeonPage = () => {
   const { id } = useParams();
   const [size, setSize] = useState(10);
   const [isAuth, setIsAuth] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [hint, setHint] = useState('');
   const { songpyeon, handleSetSongpyeon } = useSongpyeon();
 
@@ -28,7 +28,7 @@ const SongpyeonPage = () => {
 
   useEffect(() => {
     async function getFecth() {
-      const { status, ...data } = await getSongpyeon(id);
+      const { status, ...data } = await getSongpyeon(id!);
       if (status === 300) {
         setHint(data.hint);
         setIsAuth(true);
@@ -39,8 +39,10 @@ const SongpyeonPage = () => {
 
   // eslint-disable-next-line consistent-return
   const handleAuthanticate = async () => {
+    if (inputRef.current === null) return;
+    // eslint-disable-next-line consistent-return
     if (inputRef.current.value === '') return alert('암호를 입력해주세요.');
-    const { status, data } = await authenticate(id, inputRef.current.value);
+    const { status, data } = await authenticate(id!, inputRef.current.value);
     if (status === 401) alert('비밀번호가 잘못되었습니다.');
     else {
       handleSetSongpyeon(data);
@@ -55,14 +57,11 @@ const SongpyeonPage = () => {
     <Center h='100vh'>
       {isAuth && (
         <VStack align='stretch'>
-          <Box
-            display='flex'
-            direction='row'
-          >
+          <Box display='flex'>
             <pre>{'힌트 : '}</pre>
             <Text>{hint}</Text>
           </Box>
-          <Input ref={(el) => (inputRef.current = el)} />
+          <Input ref={inputRef} />
           <Button onClick={handleAuthanticate}>입력</Button>
         </VStack>
       )}

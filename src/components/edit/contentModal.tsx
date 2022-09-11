@@ -1,6 +1,6 @@
 /* eslint no-return-assign: "error" */
 import { Button, Flex, Textarea, Text } from '@chakra-ui/react';
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { SongpyeonType } from '../../hook/useSongPyeon';
@@ -37,14 +37,15 @@ export const ContentModal = ({
   handleSetSongpyeon,
   songpyeon,
 }: ContentModalType) => {
-  const content = useRef(null);
+  const content = useRef<HTMLTextAreaElement>(null);
 
   const handleGetRandomComment = () => {
+    if (content.current === null) return;
     content.current.value = getRandomComment();
   };
 
-  const handleClick = (event) => {
-    if (content.current.value === '') return;
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (content.current === null || content.current?.value === '') return;
     event.preventDefault();
     handleSetSongpyeon({
       content: content.current.value,
@@ -53,6 +54,7 @@ export const ContentModal = ({
   };
 
   useEffect(() => {
+    if (content.current === null) return;
     content.current.value = songpyeon.content;
   }, [content]);
   return (
@@ -62,7 +64,7 @@ export const ContentModal = ({
         <Button onClick={handleGetRandomComment}>랜덤 돌리기</Button>
       </Wrapper>
       <Textarea
-        ref={(el) => (content.current = el)}
+        ref={content}
         required
       />
       <Wrapper>

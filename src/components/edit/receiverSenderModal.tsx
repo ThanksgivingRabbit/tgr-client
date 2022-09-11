@@ -1,6 +1,6 @@
 /* eslint no-return-assign: "error" */
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { SongpyeonType } from '../../hook/useSongPyeon';
@@ -32,11 +32,12 @@ export const ReceiverSenderModal = ({
   handleSetSongpyeon,
   songpyeon,
 }: ReceiverSenderModalType) => {
-  const receiver = useRef(null);
-  const sender = useRef(null);
+  const receiver = useRef<HTMLInputElement>(null);
+  const sender = useRef<HTMLInputElement>(null);
 
-  const handleClick = (event) => {
-    if (receiver.current.value === '') return;
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (receiver.current === null || sender.current === null) return;
+    if (receiver.current?.value === '') return;
     event.preventDefault();
     handleSetSongpyeon({
       receiver: receiver.current.value,
@@ -47,20 +48,21 @@ export const ReceiverSenderModal = ({
   };
 
   useEffect(() => {
+    if (receiver.current === null || sender.current === null) return;
     receiver.current.value = songpyeon.receiver ?? '';
-    sender.current.value = songpyeon.sender;
+    sender.current.value = songpyeon.sender!;
   }, [receiver, sender]);
 
   return (
     <Container>
       <Wrapper>
         <Title>보내는 사람</Title>
-        <Input ref={(el) => (sender.current = el)} />
+        <Input ref={sender} />
       </Wrapper>
       <Wrapper>
         <Title>받는 사람</Title>
         <Input
-          ref={(el) => (receiver.current = el)}
+          ref={receiver}
           required
         />
       </Wrapper>

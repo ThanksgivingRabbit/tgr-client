@@ -100,7 +100,6 @@ const EditPage = () => {
                 <PasswordModal
                   songpyeon={songpyeon}
                   handleClickPrevPage={handleClickPrevPage}
-                  handleSetSongpyeon={handleSetSongpyeon}
                 />
               )}
             </div>

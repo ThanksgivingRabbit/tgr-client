@@ -1,3 +1,10 @@
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export const shareMessage = (from: string, code: string) => {
   if (!window?.Kakao) return;
   const kakao = window.Kakao;
