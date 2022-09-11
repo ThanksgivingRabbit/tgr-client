@@ -9,15 +9,11 @@ const Container = styled(Center)`
   background-repeat: no-repeat;
   background-position: center;
 
-  position: relative;
-`;
-
-const LogoImage = styled(Image)`
-  position: absolute;
-  top: 4rem;
-  left: calc(50% - 150px);
-
-  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 `;
 
 const MainBox = styled(Stack)`
@@ -31,13 +27,11 @@ const MainBox = styled(Stack)`
 
   border-radius: 10px;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
-
-  z-index: 4;
 `;
 
 const MainPage = () => (
   <Container h='100vh'>
-    <LogoImage
+    <Image
       width='300px'
       src='./thanksgivingrabbit.png'
     />
