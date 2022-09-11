@@ -36,7 +36,7 @@ export const ReceiverSenderModal = ({
   const sender = useRef(null);
 
   const handleClick = (event) => {
-    if (sender.current.value === '') return;
+    if (receiver.current.value === '') return;
     event.preventDefault();
     handleSetSongpyeon({
       receiver: receiver.current.value,
@@ -47,20 +47,20 @@ export const ReceiverSenderModal = ({
   };
 
   useEffect(() => {
-    receiver.current.value = songpyeon.receiver;
-    sender.current.value = songpyeon.sender ?? '';
+    receiver.current.value = songpyeon.receiver ?? '';
+    sender.current.value = songpyeon.sender;
   }, [receiver, sender]);
 
   return (
     <Container>
       <Wrapper>
         <Title>보내는 사람</Title>
-        <Input ref={(el) => (receiver.current = el)} />
+        <Input ref={(el) => (sender.current = el)} />
       </Wrapper>
       <Wrapper>
         <Title>받는 사람</Title>
         <Input
-          ref={(el) => (sender.current = el)}
+          ref={(el) => (receiver.current = el)}
           required
         />
       </Wrapper>
