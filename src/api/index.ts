@@ -1,14 +1,21 @@
+import axios from 'axios';
+
 import { SongpyeonType } from '../hook/useSongPyeon';
 
-const BASE_API_URL = 'https://thanks-giving-rabbit.herokuapp.com/';
+const BASE_API_URL = 'https://thanks-giving-rabbit.herokuapp.com';
 
 export const makeSongpyeon = async (data: Partial<SongpyeonType>) => {
-  const result = await fetch(`${BASE_API_URL}/api/v1/songpyeons`, {
-    method: 'POST',
-    // mode: 'no-cors',
-    body: {
-      ...data,
+  const {
+    data: {
+      data: { code },
     },
+  } = await axios({
+    url: `${BASE_API_URL}/api/v1/songpyeons`,
+    method: 'POST',
+    headers: {
+      'Content-Type': `application/json`,
+    },
+    data,
   });
-  return result.json();
+  return code;
 };
