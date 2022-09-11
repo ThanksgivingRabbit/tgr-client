@@ -82,9 +82,9 @@ const SongpyeonPage = () => {
               align='stretch'
               spacing={4}
             >
-              <Text>To. {songpyeon.sender}</Text>
+              <Text>To. {songpyeon.receiver}</Text>
               <div>{songpyeon.content}</div>
-              <Text>From. {songpyeon.receiver}</Text>
+              <Text>From. {songpyeon.sender}</Text>
               <Spacer />
               <Link to='/'>
                 <Button>글 쓰러가기</Button>
