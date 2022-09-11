@@ -1,6 +1,7 @@
 /* eslint no-return-assign: "error" */
 import { Button, Flex, Checkbox, Text, Input } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { makeSongpyeon } from '../../api';
@@ -29,6 +30,7 @@ const Title = styled(Text)`
 `;
 export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalType) => {
   const [isPassword, setIsPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
   const password = useRef(null);
   const hint = useRef(null);
 
@@ -36,12 +38,18 @@ export const PasswordModal = ({ songpyeon, handleClickPrevPage }: PasswordModalT
 
   const handleSubmit = async () => {
     if (isPassword && password.current?.value === '') return;
-    const result = await makeSongpyeon({
-      ...songpyeon,
-      password: password.current?.value,
-      hint: hint.current?.value,
-    });
-    console.log(result);
+    if (isPassword && password.current.value !== '' && hint.current.value === '')
+      alert('힌트를 넣어주세요');
+    try {
+      const code = await makeSongpyeon({
+        ...songpyeon,
+        password: password.current?.value ?? null,
+        hint: hint.current?.value ?? null,
+      });
+      navigate(`/result/${code}/${songpyeon.sender === '' ? '익명' : songpyeon.sender}`);
+    } catch (e) {
+      alert('에러가 생겼습니다.');
+    }
   };
 
   return (
