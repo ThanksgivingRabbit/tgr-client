@@ -13,6 +13,7 @@ const SongpyeonImg = styled.div<{ size: number }>`
   width: ${({ size }) => `${size}rem`};
   height: ${({ size }) => `${size}rem`};
   background-size: cover !important;
+  background-position: center !important;
   background: url('/songpyeon.png');
 `;
 
@@ -69,9 +70,13 @@ const SongpyeonPage = () => {
         <div>
           {size < 14 ? (
             // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-            <div onClick={handleClick}>
+            <VStack
+              align='center'
+              onClick={handleClick}
+            >
               <SongpyeonImg size={size} />
-            </div>
+              <Text>눌러주세요</Text>
+            </VStack>
           ) : (
             <VStack
               align='stretch'

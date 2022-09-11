@@ -10,6 +10,7 @@ const SongpyeonImg = styled.div<{ size: number }>`
   width: ${({ size }) => `${size}rem`};
   height: ${({ size }) => `${size}rem`};
   background-size: cover !important;
+  background-position: center !important;
   background: url('/songpyeon.png ');
 `;
 
