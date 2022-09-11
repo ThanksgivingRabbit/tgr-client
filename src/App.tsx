@@ -20,7 +20,7 @@ function App() {
         />
         <Route
           element={<ResultPage />}
-          path='/result'
+          path='/result/:id/:sender'
         />
         <Route
           element={<SongpyeonPage />}
