@@ -1,15 +1,29 @@
-import { Box, Button, Heading, Image, Link, Text } from '@chakra-ui/react';
+import { Button, Center, Heading, Image, Link, Stack, Text } from '@chakra-ui/react';
 import styled from 'styled-components';
+
+const Container = styled(Center)`
+  height: 100%;
+  width: 100%;
+  background: url('./test_image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  position: relative;
+`;
 
 const LogoImage = styled(Image)`
   position: absolute;
-  top: 0;
+  top: 4rem;
   left: calc(50% - 150px);
+
+  z-index: 3;
 `;
 
-const MainBox = styled(Box)`
+const MainBox = styled(Stack)`
   height: 16rem;
-  width: 32rem;
+  width: 28rem;
+  max-width: 80%;
 
   display: flex;
   flex-direction: column;
@@ -18,26 +32,25 @@ const MainBox = styled(Box)`
   border-radius: 10px;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
 
-  position: absolute;
-  left: calc(50% - 16rem);
-  top: 200px;
+  z-index: 4;
 `;
 
 const MainPage = () => (
-  <Box
-    position='relative'
-    backgroundImage='/test_image.png'
-    backgroundSize='100% 100%'
-    minWidth='900px'
-    minHeight='600px'
-    width='100vw'
-    height='100vh'
-  >
+  <Container h='100vh'>
+    <LogoImage
+      width='300px'
+      src='./thanksgivingrabbit.png'
+    />
     <MainBox bg='yellow.200'>
-      <Heading marginTop='2rem'>친구에게 송편을 선물하세요</Heading>
+      <Heading
+        fontSize='3xl'
+        marginTop='2rem'
+      >
+        송편을 선물하세요
+      </Heading>
       <Text
         margin='1rem 0'
-        fontSize='2xl'
+        fontSize='xl'
       >
         선물주는 토끼
       </Text>
@@ -54,11 +67,7 @@ const MainPage = () => (
         </Button>
       </Link>
     </MainBox>
-    <LogoImage
-      width='300px'
-      src='/thanksgivingrabbit.png'
-    />
-  </Box>
+  </Container>
 );
 
 export default MainPage;
