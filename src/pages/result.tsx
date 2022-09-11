@@ -28,6 +28,7 @@ const ResultPage = () => {
   useEffect(() => {
     if (canvasRef.current === null) return;
     const ctx = canvasRef.current?.getContext('2d');
+    if (ctx === null) return;
     image.src = '/songpyeon.png';
     image.onload = function () {
       ctx.drawImage(image, 0, height, image.width, image.height);
@@ -37,6 +38,7 @@ const ResultPage = () => {
   useEffect(() => {
     if (canvasRef.current === null) return;
     const ctx = canvasRef.current?.getContext('2d');
+    if (ctx === null) return;
     ctx.clearRect(0, 0, window.screen.width, window.screen.height);
     ctx.drawImage(image, 0, height, image.width, image.height);
   }, [canvasRef, height]);
