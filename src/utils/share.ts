@@ -14,7 +14,7 @@ export const shareMessage = (from: string, code: string) => {
   }
   kakao.Share.sendDefault({
     objectType: 'text',
-    text: `${from} 으로부터 편지가 도착했어요!`,
+    text: `${from} 으로부터 송편이 도착했어요!`,
     link: {
       mobileWebUrl: `https://thanksgivingrabbit.vercel.app/songpyeon/${code}`,
       webUrl: `https://thanksgivingrabbit.vercel.app/songpyeon/${code}`,
